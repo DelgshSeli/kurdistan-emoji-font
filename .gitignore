@@ -1,3 +1,5 @@
-﻿*.ttf
+*.ttf
+!dist/
+!dist/*.ttf
 __pycache__/
 .venv/

@@ -1,13 +1,14 @@
 # Checks the six-scalar IQ-KR sequence shapes to exactly one glyph.
+# Counts glyphs rather than names, because nanoemoji names glyphs itself.
 import sys
 import uharfbuzz as hb
-face = hb.Face(hb.Blob.from_file_path(sys.argv[1]))
-font = hb.Font(face)
+
+font = hb.Font(hb.Face(hb.Blob.from_file_path(sys.argv[1])))
 buf = hb.Buffer()
 buf.add_str("\U0001F3F4\U000E0069\U000E0071\U000E006B\U000E0072\U000E007F")
 buf.guess_segment_properties()
 hb.shape(font, buf, {"ccmp": True, "liga": True})
-names = [font.glyph_to_string(i.codepoint) for i in buf.glyph_infos]
-print("glyphs:", names)
-assert names == ["emoji_u1f3f4_e0069_e0071_e006b_e0072_e007f"], names
+glyphs = [info.codepoint for info in buf.glyph_infos]
+print("glyph ids:", glyphs)
+assert len(glyphs) == 1, f"expected 1 glyph, got {len(glyphs)}"
 print("PASS")
