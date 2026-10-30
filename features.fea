@@ -1,0 +1,17 @@
+# IQ-KR (ISO 3166-2 IQ-KR, CLDR iqkr) tag sequence -> colour glyph.
+# Placeholder glyph name; the real glyph must be a COLR/sbix base glyph.
+languagesystem DFLT dflt;
+languagesystem latn dflt;
+
+lookup IQKR_TagSequence {
+    sub uni1F3F4 uniE0069 uniE0071 uniE006B uniE0072 uniE007F
+        by emoji_u1f3f4_e0069_e0071_e006b_e0072_e007f;
+} IQKR_TagSequence;
+
+feature ccmp {
+    lookup IQKR_TagSequence;
+} ccmp;
+
+feature liga {
+    lookup IQKR_TagSequence;
+} liga;
